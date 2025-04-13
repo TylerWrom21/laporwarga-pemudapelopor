@@ -1,0 +1,2 @@
+<i {{ $attributes->merge(['class' => 'text-2xl rounded-md items-center justify-center border-slate-150 w-10 border h-10 dark:text-gray-50 hover:bg-blue-600 hover:cursor-pointer transition ease-in-out duration-150', 'style' => 'display:flex;'])}} >
+</i>
