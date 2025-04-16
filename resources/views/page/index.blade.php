@@ -51,4 +51,33 @@
   </section>
   </body>
   <script src="../asset/js/script.js"></script>
+  <script>
+    function homeSlider() {
+    let slides = document.querySelectorAll(".slide");
+    let index = 0;
+    let nextSlider = document.querySelector('#nextSlide');
+    let prevSlider = document.querySelector('#prevSlide');
+    
+    function showSlide(i) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        slides[i].classList.add("active");
+    }
+    
+    function nextSlide() {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+    }
+    
+    function prevSlide() {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+    }
+    
+    nextSlider.addEventListener("click", nextSlide);
+    prevSlider.addEventListener("click", prevSlide);
+    
+    setInterval(nextSlide, 5000);
+    }
+    homeSlider();
+  </script>
 </html>

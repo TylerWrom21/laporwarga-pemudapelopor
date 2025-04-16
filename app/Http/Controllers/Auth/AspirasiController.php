@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Aspirasi;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AspirasiController extends Controller
@@ -13,15 +14,16 @@ class AspirasiController extends Controller
      */
     public function index()
     {
-        return view('auth.aspirasi');
+        $aspirasis = Aspirasi::where('user_id', Auth::id())->latest()->get();
+        return view('auth.aspirasi_list', compact('aspirasis'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('auth.aspirasi');
     }
 
     /**
@@ -41,7 +43,7 @@ class AspirasiController extends Controller
             'status' => 'dikirim',
         ]);
     
-        return redirect()->route('dashboard')->with('success', 'Aspirasi berhasil dikirim!');
+        return redirect()->route('auth.dashboard')->with('success', 'Aspirasi berhasil dikirim!');
     }
 
     /**
@@ -71,8 +73,15 @@ class AspirasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Aspirasi $aspirasi)
+    public function destroy($id)
     {
-        //
+        $aspirasi = Aspirasi::findOrFail($id);
+
+        if ($aspirasi->user_id === auth()->id()) {
+            $aspirasi->delete();
+            return redirect()->route('aspirasi.list')->with('success', 'Aspirasi berhasil dihapus.');
+        }
+
+        abort(403);
     }
 }

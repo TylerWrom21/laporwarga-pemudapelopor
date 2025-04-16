@@ -6,28 +6,14 @@ function theme() {
     }
 }
 theme();
-function homeSlider() {
-    let slides = document.querySelectorAll(".slide");
-    let index = 0;
-    
-    function showSlide(i) {
-        slides.forEach((slide) => slide.classList.remove("active"));
-        slides[i].classList.add("active");
-    }
-    
-    function nextSlide() {
-        index = (index + 1) % slides.length;
-        showSlide(index);
-    }
-    
-    function prevSlide() {
-        index = (index - 1 + slides.length) % slides.length;
-        showSlide(index);
-    }
-    
-    document.getElementById("nextSlide").addEventListener("click", nextSlide);
-    document.getElementById("prevSlide").addEventListener("click", prevSlide);
-    
-    setInterval(nextSlide, 5000);
+function sidebar() {
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.getElementById("sidebarToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        toggleBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("-translate-x-full");
+        });
+    });
 }
-homeSlider();
+sidebar();

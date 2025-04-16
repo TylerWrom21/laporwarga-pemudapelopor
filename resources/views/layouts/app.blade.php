@@ -45,13 +45,12 @@
         <link rel = "apple-touch-icon" type = "image/png" href = "/asset/image/laporwarga.png"/>
         <title>LaporWarga</title>
     </head>
-    <body>
+    <body class="dark:bg-gray-700 min-h-screen">
         <x-navbar></x-navbar>
         <x-sidebar></x-sidebar>
         <div {{ $attributes->merge(['class' => 'p-4 sm:ml-64 min-h-screen dark:bg-gray-900'])}}>
             {{ $slot }}
         </div>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script src="../asset/js/script.js"></script>
 </html>

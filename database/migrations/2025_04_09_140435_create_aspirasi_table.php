@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('aspirasi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('judul');
             $table->text('isi');
             $table->enum('status', ['dikirim', 'diproses', 'selesai'])->default('dikirim');

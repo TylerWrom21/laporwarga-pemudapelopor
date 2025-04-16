@@ -79,7 +79,14 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            if (Auth::user()->role === 'petugas') {
+                return redirect()->route('petugas.dashboard');
+            } else if (Auth::user()->role === 'administrator') {
+                return redirect()->route('administrator.dashboard');
+            } else if (Auth::user()->role === 'masyarakat'){
+                return redirect()->route('auth.dashboard');
+            }
+            // return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([

@@ -21,6 +21,7 @@ class Aspirasi extends Authenticatable
     {
         return $this->belongsTo(User::class);
     }
+    protected $table = 'aspirasi';
     protected $fillable = [
         'user_id',
         'judul',
