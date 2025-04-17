@@ -21,10 +21,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Aspirasi::class);
     }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->uuid = \Illuminate\Support\Str::uuid();
+        });
+    }
     protected $fillable = [
         'nama',
-        'nik',
-        'telp',
         'email',
         'role',
         'password',

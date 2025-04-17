@@ -40,34 +40,21 @@
 </html> --}}
 <!doctype html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="/asset/image/laporwarga.png">
-    <link rel="apple-touch-icon" type="image/png" href="/asset/image/laporwarga.png" />
-    <title>LaporWarga</title>
-</head>
-
-<body class="min-h-screen dark:bg-gray-700">
-    <x-navbar></x-navbar>
-    <x-sidebar></x-sidebar>
-    <div {{ $attributes->merge(['class' => 'p-4 sm:ml-64 min-h-screen dark:bg-gray-900'])}}>
-
-        @if (isset($header))
-            <header class="bg-white shadow dark:bg-gray-800">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-        {{ $slot }}
-    </div>
-</body>
-<script src="../asset/js/script.js"></script>
-
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @vite('resources/css/app.css')
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel = "icon" type = "image/png" href = "{{ asset('asset/image/laporwarga.png') }}">
+        <link rel = "apple-touch-icon" type = "image/png" href = "{{ asset('asset/image/laporwarga.png') }}"/>
+        <title>LaporWarga</title>
+    </head>
+    <body class="min-h-screen dark:bg-gray-700">
+        <x-navbar></x-navbar>
+        <x-sidebar></x-sidebar>
+        <div {{ $attributes->merge(['class' => 'p-4 sm:ml-64 min-h-screen dark:bg-gray-900'])}}>
+            {{ $slot }}
+        </div>
+    </body>
+    <script src="{{ asset('asset/js/script.js') }}"></script>
 </html>

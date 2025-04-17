@@ -41,8 +41,12 @@ Route::middleware(['auth', 'role:masyarakat'])->group(function () {
 });
 Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::get('/dashboard-petugas', [PetugasController::class, 'index'])->name('petugas.dashboard');
-    Route::get('/aspirasi-petugas', [PetugasController::class, 'show'])->name('petugas.aspirasi');
-    Route::delete('/aspirasi-petugas/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+    Route::get('/aspirasi-list', [PetugasController::class, 'show'])->name('petugas.aspirasi');
+    Route::delete('/aspirasi-list/{id}', [PetugasController::class, 'destroy'])->name('petugas.destroy');
+    Route::get('/aspirasi/{uuid}/detail', [PetugasController::class, 'detail'])->name('petugas.aspirasi.detail');
+    Route::post('/aspirasi/{uuid}/tanggapan', [PetugasController::class, 'tanggapan'])->name('petugas.aspirasi.tanggapan');
+    Route::get('/masyarakat-list', [PetugasController::class, 'masyarakat'])->name('petugas.masyarakat');
+    Route::delete('/masyarakat-list/{id}', [PetugasController::class, 'delete'])->name('petugas.delete');
 });
 
 Route::middleware(['admin'])->group(function () {

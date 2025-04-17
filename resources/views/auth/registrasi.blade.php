@@ -21,14 +21,6 @@
             <input type="text" id="nama" name="nama" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
           </div>
           <div class="mb-5">
-            <label for="nik" class="block mb-2 text-lg font-semibold text-gray-900">NIK</label>
-            <input type="number" id="nik" name="nik" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
-          </div>
-          <div class="mb-5">
-            <label for="telp" class="block mb-2 text-lg font-semibold text-gray-900">Nomor Telepon</label>
-            <input type="tel" id="telp" name="telp" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
-          </div>
-          <div class="mb-5">
             <label for="email" class="block mb-2 text-lg font-semibold text-gray-900">Email</label>
             <input type="email" id="email" name="email" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="" required />
           </div>
