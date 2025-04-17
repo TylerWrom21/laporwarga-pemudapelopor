@@ -1,6 +1,6 @@
 <div class="flex fixed w-full top-0 items-center justify-between py-5 px-20 bg-blue-500 text-slate-100 z-50">
     <div class="flex gap-2 items-center justify-center">
-        <img class="w-12 h-12" src="asset/image/laporwarga.png" alt="LaporWarga" srcset="">
+        <img class="w-12 h-12" src="{{ asset('asset/image/laporwarga.png') }}" alt="LaporWarga" srcset="">
         <a href="/" class="text-2xl">LaporWarga</a>
     </div>
     <div class="flex items-center gap-5">

@@ -42,14 +42,10 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => ['required', 'string', 'max:32'],
-            'nik' => ['required', 'string', 'max:16', 'unique:users,nik'],
-            'telp' => ['required', 'string', 'max:16', 'unique:users,telp'],
             'email' => ['required', 'email', 'unique:users,email'],
             'role' => 'masyarakat',
             'password' => ['required', 'min:8', 'confirmed'],
         ], [
-            'nik.unique' => 'NIK ini sudah digunakan.',
-            'telp.unique' => 'Nomor Telepon ini sudah digunakan.',
             'email.unique' => 'Email ini sudah digunakan.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
@@ -60,8 +56,6 @@ class UserController extends Controller
 
         $user = User::create([
             'nama' => $request->nama,
-            'nik' => $request->nik,
-            'telp' => $request->telp,
             'email' => $request->email,
             'role' => 'masyarakat',
             'password' => Hash::make($request->password),
