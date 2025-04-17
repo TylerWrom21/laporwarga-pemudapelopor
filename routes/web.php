@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
@@ -19,14 +20,20 @@ use App\Http\Controllers\PetugasController;
 Route::get('/', function () {
     return view('page.index');
 });
-Route::get('/registrasi', [UserController::class, 'showregister']);
-Route::post('/registrasi', [UserController::class, 'register'])->name('registrasi.store');
-Route::get('/login', [UserController::class, 'showlogin'])->name('login');
-Route::post('/login', [UserController::class, 'login'])->name('registrasi.login');
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/registrasi', [UserController::class, 'showregister']);
+    Route::post('/registrasi', [UserController::class, 'register'])->name('registrasi.store');
+    Route::get('/login', [UserController::class, 'showlogin'])->name('login');
+    Route::post('/login', [UserController::class, 'login'])->name('registrasi.login');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+});
 
 Route::middleware(['auth', 'role:masyarakat'])->group(function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('auth.dashboard');
+    Route::get('/auth/dashboard', [UserController::class, 'dashboard'])->name('auth.dashboard');
     Route::get('/aspirasi', [AspirasiController::class, 'index'])->name('aspirasi.list');
     Route::delete('/aspirasi/{id}', [AspirasiController::class, 'destroy'])->name('aspirasi.destroy');
     Route::get('/aspirasi/buat', [AspirasiController::class, 'create'])->name('aspirasi.create');
@@ -40,4 +47,10 @@ Route::middleware(['auth', 'role:petugas'])->group(function () {
     Route::post('/aspirasi/{uuid}/tanggapan', [PetugasController::class, 'tanggapan'])->name('petugas.aspirasi.tanggapan');
     Route::get('/masyarakat-list', [PetugasController::class, 'masyarakat'])->name('petugas.masyarakat');
     Route::delete('/masyarakat-list/{id}', [PetugasController::class, 'delete'])->name('petugas.delete');
+});
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/aspirasi-admin', [AdminController::class, 'show'])->name('admin.aspirasi');
+    Route::delete('/aspirasi-admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });

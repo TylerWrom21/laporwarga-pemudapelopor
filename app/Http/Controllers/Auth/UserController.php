@@ -73,14 +73,11 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if (Auth::user()->role === 'petugas') {
-                return redirect()->route('petugas.dashboard');
-            } else if (Auth::user()->role === 'administrator') {
-                return redirect()->route('administrator.dashboard');
-            } else if (Auth::user()->role === 'masyarakat'){
-                return redirect()->route('auth.dashboard');
-            }
-            // return redirect()->intended('/dashboard');
+            return match (Auth::user()->role) {
+                'petugas' => redirect()->route('petugas.dashboard'),
+                'administrator' => redirect()->route('admin.dashboard'),
+                'masyarakat' => redirect()->route('auth.dashboard'),
+            };
         }
 
         return back()->withErrors([
@@ -112,7 +109,7 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
-    
+
     public function update(Request $request, $slug)
     {
         // echo "update";
@@ -121,7 +118,7 @@ class UserController extends Controller
         if (auth()->id() !== $user->id) {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
@@ -144,7 +141,7 @@ class UserController extends Controller
             ->with('success', 'User has been updated!');
     }
 
-    public function destroy(User $slug)
+    public function destroy(User $user)
     {
         $user->delete();
         return redirect()->route('login')
